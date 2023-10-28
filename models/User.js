@@ -31,6 +31,13 @@ const userSchema = new Schema(
     avatarURL: {
       type: String,
     },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationCode: {
+      type: String,
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -59,6 +66,10 @@ export const userUpdateSubscriptionSchema = Joi.object({
 
 export const userUpdateAvatarSchema = Joi.object({
   avatar: Joi.string(),
+});
+
+export const userEmailSchema = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required(),
 });
 
 const User = model("user", userSchema);

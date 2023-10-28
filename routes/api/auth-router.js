@@ -15,8 +15,13 @@ const userLoginValidate = validateBody(userSchemas.userLoginSchema);
 const userUpdateSubscriptionValidate = validateBody(
   userSchemas.userUpdateSubscriptionSchema
 );
+const userEmailValidate = validateBody(userSchemas.userEmailSchema);
 
 authRouter.post("/register", userRegisterValidate, authController.register);
+
+authRouter.get("/verify/:verificationCode", authController.verify);
+
+authRouter.post("/verify", userEmailValidate, authController.resendVerifyEmail);
 
 authRouter.post("/login", userLoginValidate, authController.login);
 
